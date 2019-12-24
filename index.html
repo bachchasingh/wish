@@ -44,7 +44,7 @@ document.getElementById('mnshr').style.display = 'block';
 document.getElementById('shreCntnr').style.display = 'none';
 var fn = titleCase(document.getElementById("fn").value);
 
-var _link = window.location.origin + '/wish?t=' + fn; 
+var _link = window.location.origin + '/wish?t=' + fn.replace(/ /g, "_"); 
 document.getElementById("shareFB").href = "https://www.facebook.com/sharer/sharer.php?u=" + _link;
 var wappUri = "https://api.whatsapp.com/send?text=Merry Christmas " + fn + " - " + _link;			
 document.getElementById("onWhatsappShare").href = encodeURI(wappUri);
@@ -55,7 +55,7 @@ document.getElementById("copyLink").href = _link;
 
 function copyLink(e) {
 	var fn = titleCase(document.getElementById("fn").value);
-	var copyUrl = window.location.origin + '/wish?t=' + fn; 
+	var copyUrl = window.location.origin + '/wish?t=' + fn.replace(/ /g, "_"); 
 	var textarea = document.createElement('textarea');
 	textarea.style.position = "absolute";
 	textarea.style.left = "-99999px";
@@ -88,7 +88,8 @@ function titleCase(str) {
   }
   return str.join(' ');
 }
-var ttl = getQueryStringValue('t');
+var str = getQueryStringValue('t');
+var ttl = str.replace("_"," ");
 var fnlTtl = 'Merry Christmas ' + titleCase(ttl);
 document.title = fnlTtl;
 document.getElementById('msg').innerText  = fnlTtl;
