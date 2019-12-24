@@ -28,7 +28,7 @@ body { font-family: 'Lobster Two', cursive; }
 	  <a class="on-whatsapp" href=""  id="onWhatsappShare" title="Share on WhatsApp">Share on WhatsApp</a>
       <br/><a class="on-facebook" href=""  id="shareFB" title="Share on Facebook">Share with friends on Facebook</a>
       <br/><a class="on-mail" href=""  id="shareEM" title="Share by Email">Send on Email</a>
-      <br/><a class="copy-link" href="" id="copyLink"  onclick="copyLink(this);" title="Copy Link">Copy Link</a>
+      <br/><a class="copy-link" href="javascript:void(0);" id="copyLink"  onclick="copyLink(this);" title="Copy Link">Copy Link</a>
 	  <input type="hidden" name="linkToCopy" id="linkToCopy">
 			</div>
 		</center>	
@@ -49,13 +49,14 @@ document.getElementById("shareFB").href = "https://www.facebook.com/sharer/share
 var wappUri = "https://api.whatsapp.com/send?text=Merry Christmas " + fn + " - " + _link;			
 document.getElementById("onWhatsappShare").href = encodeURI(wappUri);
 document.getElementById("shareEM").href = "mailto:?subject= Merry Christmas " + fn + "&body=" + _link;
-document.getElementById("copyLink").href = _link;
-
 }
 
 function copyLink(e) {
+
 	var fn = titleCase(document.getElementById("fn").value);
 	var copyUrl = window.location.origin + '/wish?t=' + fn.replace(/ /g, "_"); 
+	
+	
 	var textarea = document.createElement('textarea');
 	textarea.style.position = "absolute";
 	textarea.style.left = "-99999px";
