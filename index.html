@@ -7,6 +7,7 @@
 <style>
 body { font-family: 'Lobster Two', cursive; }
 #msg { color:red; }
+#shreCntnr, #mnshr { display:none; }
 </style>
 </head>
 <body>
@@ -15,9 +16,65 @@ body { font-family: 'Lobster Two', cursive; }
 			<img src="tree.gif" />
 			<br/>
 			<h1 id="msg">Merry Christmas</h1>
+			<a href="javascript:void(0);" onclick="showShare(this);">Share with your friends</a>
+			<div id="shreCntnr">
+				<input type="text" name="fn" id="fn" placeholder="Enter your friend name" />
+				<a href="javascript:void(0);" onclick="share(this);">Share</a>
+			</div>
+			<div id="mnshr">
+	  <a class="on-whatsapp" href=""  id="onWhatsappShare" title="Share on WhatsApp">Share on WhatsApp</a>
+      <br/><a class="on-facebook" href=""  id="shareFB" title="Share on Facebook">Share with friends on Facebook</a>
+      <br/><a class="on-mail" href=""  id="shareEM" title="Share by Email">Send on Email</a>
+      <br/><a class="copy-link" href="javascript:void(0)" id="copyLink"  onclick="copyLink(this);" title="Copy Link">Copy Link</a>
+	  <input type="hidden" name="linkToCopy" id="linkToCopy">
+			</div>
 		</center>	
 	</div>
 <script>
+function showShare(e) {
+document.getElementById('shreCntnr').style.display = 'block';
+e.style.display = 'none';
+}
+
+function share(e) {
+document.getElementById('mnshr').style.display = 'block';
+document.getElementById('shreCntnr').style.display = 'none';
+var fn = titleCase(document.getElementById("fn").value);
+
+var _link = window.location.origin + '/wish?t=' + fn; 
+document.getElementById("shareFB").href = "https://www.facebook.com/sharer/sharer.php?u=" + _link;
+var wappUri = "https://api.whatsapp.com/send?text=Merry Christmas " + fn + " - " + _link;			
+document.getElementById("onWhatsappShare").href = encodeURI(wappUri);
+document.getElementById("shareEM").href = "mailto:?subject= Merry Christmas " + fn + "&body=" + _link;
+document.getElementById("copyLink").href = _link;
+
+}
+
+function copyLink(e) {
+	var fn = titleCase(document.getElementById("fn").value);
+	var copyUrl = window.location.origin + '/wish?t=' + fn; 
+	var textarea = document.createElement('textarea');
+	textarea.style.position = "absolute";
+	textarea.style.left = "-99999px";
+	textarea.setAttribute("readonly", "");
+	textarea.textContent = copyUrl;
+	document.body.appendChild(textarea);
+
+	var selection = document.getSelection();
+	var range = document.createRange();
+
+	range.selectNode(textarea);
+	selection.removeAllRanges();
+	selection.addRange(range);
+
+	document.execCommand('copy');
+	selection.removeAllRanges();
+	document.body.removeChild(textarea);
+	
+	e.setAttribute("class", "copied");
+	
+}
+
 function getQueryStringValue(key){
 	return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
 }
