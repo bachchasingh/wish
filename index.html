@@ -11,6 +11,9 @@
 body { font-family: 'Lobster Two', cursive; }
 #msg { color:red; }
 #shreCntnr, #mnshr { display:none; }
+a { color:red; }
+a.copied { color:green; }
+
 </style>
 </head>
 <body>
@@ -46,7 +49,7 @@ var fn = titleCase(document.getElementById("fn").value);
 
 var _link = window.location.origin + '/wish?t=' + fn.replace(/ /g, "_"); 
 document.getElementById("shareFB").href = "https://www.facebook.com/sharer/sharer.php?u=" + _link;
-var wappUri = "https://api.whatsapp.com/send?text=Merry Christmas " + fn + " - " + _link;			
+var wappUri = "https://api.whatsapp.com/send?text=Merry Christmas " + fn + " - Click on below link and share with your friends - " + _link;			
 document.getElementById("onWhatsappShare").href = encodeURI(wappUri);
 document.getElementById("shareEM").href = "mailto:?subject= Merry Christmas " + fn + "&body=" + _link;
 }
