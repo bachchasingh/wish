@@ -29,9 +29,7 @@ a.copied { color:green; }
 			</div>
 			<div id="mnshr">
 	  <a class="on-whatsapp" href=""  id="onWhatsappShare" title="Share on WhatsApp">Share on WhatsApp</a>
-      <br/><a class="on-facebook" href=""  id="shareFB" title="Share on Facebook">Share with friends on Facebook</a>
-      <br/><a class="on-mail" href=""  id="shareEM" title="Share by Email">Send on Email</a>
-      <br/><a class="copy-link" href="javascript:void(0);" id="copyLink"  onclick="copyLink(this);" title="Copy Link">Copy Link</a>
+     <br/><a class="copy-link" href="javascript:void(0);" id="copyLink"  onclick="copyLink(this);" title="Copy Link">Copy Link</a>
 	  <input type="hidden" name="linkToCopy" id="linkToCopy">
 			</div>
 		</center>	
@@ -48,10 +46,8 @@ document.getElementById('shreCntnr').style.display = 'none';
 var fn = titleCase(document.getElementById("fn").value);
 
 var _link = window.location.origin + '/wish?t=' + fn.replace(/ /g, "_"); 
-document.getElementById("shareFB").href = "https://www.facebook.com/sharer/sharer.php?u=" + _link;
 var wappUri = "https://api.whatsapp.com/send?text=Merry Christmas " + fn + " - Click on below link and share with your friends - " + _link;			
 document.getElementById("onWhatsappShare").href = encodeURI(wappUri);
-document.getElementById("shareEM").href = "mailto:?subject= Merry Christmas " + fn + "&body=" + _link;
 }
 
 function copyLink(e) {
